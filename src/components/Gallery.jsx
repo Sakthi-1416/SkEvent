@@ -1,66 +1,90 @@
 import { useState, useEffect, useCallback } from "react";
+import g1 from '../assests/g1.webp'
+import g2 from '../assests/g2.webp'
+import g3 from '../assests/g3.webp'
+import g4 from '../assests/g4.webp'
+import g5 from '../assests/g5.webp'
+import g6 from '../assests/g6.webp'
+import g7 from '../assests/g7.webp'
+import g8 from '../assests/g8.webp'
+import g10 from '../assests/g10.webp'
+import g11 from '../assests/g11.webp'
+import g12 from '../assests/g12.webp'
+import g13 from '../assests/g13.webp'
+import g14 from '../assests/g14.webp'
+import g15 from '../assests/g15.webp'
 
-/*
-  ─────────────────────────────────────────────────
-  HOW TO USE YOUR OWN IMAGES:
 
-  1. Put your photos inside:  src/assets/gallery/
-  2. Import each one at the top of this file:
-       import img1 from '../assets/gallery/event1.jpg'
-       import img2 from '../assets/gallery/event2.jpg'
-       ...
-  3. Replace the `images` array below:
-       const images = [
-         { src: img1, caption: "Wedding Reception", category: "Wedding" },
-         { src: img2, caption: "Corporate Gala",    category: "Corporate" },
-       ]
-  ─────────────────────────────────────────────────
-*/
 
 // ── Replace these with your own imports ──
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&fit=crop",
+    src: g1,
     caption: "Grand Wedding Ceremony",
     category: "Wedding",
   },
   {
-    src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80&fit=crop",
+    src: g2,
     caption: "Floral Stage Setup",
     category: "Wedding",
   },
   {
-    src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80&fit=crop",
+    src: g3,
     caption: "Corporate Summit",
     category: "Corporate",
   },
   {
-    src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&fit=crop",
+    src: g4,
     caption: "Golden Evening Gala",
     category: "Gala",
   },
   {
-    src: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80&fit=crop",
+    src: g5,
     caption: "Harmonia Live Concert",
     category: "Concert",
   },
   {
-    src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80&fit=crop",
+    src: g6,
     caption: "Brand Activation Night",
     category: "Brand",
   },
   {
-    src: "https://images.unsplash.com/photo-1478147427282-58a87a433d67?w=800&q=80&fit=crop",
+    src: g7,
     caption: "Royal Birthday Celebration",
     category: "Private",
   },
   {
-    src: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80&fit=crop",
+    src: g8,
     caption: "Event Planning Session",
     category: "Corporate",
   },
   {
-    src: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&fit=crop",
+    src: g10,
+    caption: "Luxury Venue Decor",
+    category: "Gala",
+  },
+  {
+    src: g11,
+    caption: "Luxury Venue Decor",
+    category: "Gala",
+  },
+  {
+    src: g12,
+    caption: "Luxury Venue Decor",
+    category: "Gala",
+  },
+  {
+    src: g13,
+    caption: "Luxury Venue Decor",
+    category: "Gala",
+  },
+   {
+    src: g14,
+    caption: "Luxury Venue Decor",
+    category: "Gala",
+  },
+   {
+    src: g15,
     caption: "Luxury Venue Decor",
     category: "Gala",
   },

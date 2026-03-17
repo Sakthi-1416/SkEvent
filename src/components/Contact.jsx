@@ -6,7 +6,7 @@ const contactInfo = [
   {
     icon: "bi-geo-alt",
     label: "Location",
-    value: "No. 24, Anna Salai, Teynampet\nChennai, Tamil Nadu — 600018",
+    value: "Kadukarai, Kanyakumari, Tamil Nadu",
   },
   {
     icon: "bi-telephone",
