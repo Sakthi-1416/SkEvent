@@ -9,7 +9,7 @@ const HERO_CONTENT = {
     highlight: "Unforgettable",
     suffix: "Moments"
   },
-  subtitle: "From intimate gatherings to grand galas — SK Events transforms your vision into an extraordinary reality.",
+  subtitle: "From intimate gatherings to grand galas — SK Event transforms your vision into an extraordinary reality.",
   ctaPrimary: "Plan Your Event",
   ctaSecondary: "View Our Work"
 };

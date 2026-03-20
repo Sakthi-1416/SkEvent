@@ -1,3 +1,4 @@
+import sklogo from '../assests/logoSk.png'
 const socials = [
   { icon: "bi-instagram", label: "Instagram", href: "https://www.instagram.com/_sk_even_t" },
   { icon: "bi-facebook", label: "Facebook", href: "#" },
@@ -36,15 +37,16 @@ export default function Footer() {
 
           {/* Logo + tagline */}
           <div className="col-12 col-md-4">
-            <a href="#home" className="d-flex align-items-center gap-3 text-decoration-none mb-3">
-              <div className="sk-logo-box">
-                <span className="sk-logo-text">SK</span>
-              </div>
-              <div>
-                <div className="sk-brand-name">SK Events</div>
+          
+            <a className="navbar-brand d-flex align-items-center gap-3" href="#home">
+                     <div className="sklogo">
+                      <img src={sklogo} className="logo-sk" alt="sklogo" />
+                     </div>
+                     <div>
+                <div className="sk-brand-name">SK Event</div>
                 <div className="sk-brand-sub">A to Z Event Planners</div>
               </div>
-            </a>
+                    </a>
             <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.8 }}>
               Creating unforgettable moments across Kanyakumari and beyond — from stage decoration to grand corporate events.
             </p>

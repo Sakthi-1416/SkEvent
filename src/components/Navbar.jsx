@@ -12,9 +12,9 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Home", href: "#home" },
-    { label: "Services", href: "#services" },
     // { label: "Our Works", href: "#works" },
     { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
     { label: "Testimonials", href: "#testimonials" },
   ];
