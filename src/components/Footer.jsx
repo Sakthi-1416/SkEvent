@@ -99,7 +99,7 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
-          <p className="footer-copyright mb-0">© 2025 <a className="text-decoration-none text-danger" target="_blank" href="https:zaclab.in">Zaclab</a>. All Rights Reserved.</p>
+          <p className="footer-copyright mb-0">© 2025 <a className="text-decoration-none text-danger" target="_blank" href="https://zaclab.in">Zaclab</a>. All Rights Reserved.</p>
           <div className="d-flex gap-4">
             {footerLinks.map((l) => (
               <a key={l} href="#" className="footer-link">{l}</a>
