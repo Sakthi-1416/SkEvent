@@ -1,219 +1,79 @@
-// Contact.jsx
 import { useState, useCallback, memo } from "react";
 
-// Static data moved outside component
-const contactInfo = [
-  {
-    icon: "bi-geo-alt",
-    label: "Location",
-    value: "Kadukarai, Kanyakumari, Tamil Nadu",
-  },
-  {
-    icon: "bi-telephone",
-    label: "Phone",
-    value: "+91 75988 38061\n+91 8525058302",
-  },
-  {
-    icon: "bi-envelope",
-    label: "Email",
-    value: "sumithkaran15071999@gmail.com",
-  },
-];
-
-// Form fields configuration
 const formFields = [
-  { 
-    type: "text", 
-    name: "name", 
-    label: "Your Name", 
-    placeholder: "Arjun Mehta", 
-    required: true,
-    col: 6 
-  },
-  { 
-    type: "tel", 
-    name: "phone", 
-    label: "Phone Number", 
-    placeholder: "+91 98000 00000", 
-    required: false,
-    col: 6 
-  },
-  { 
-    type: "email", 
-    name: "email", 
-    label: "Email Address", 
-    placeholder: "you@example.com", 
-    required: true,
-    col: 12 
-  },
+  { type: "text",  name: "name",  label: "Your Name",      placeholder: "Arjun Mehta",       required: true,  col: 6 },
+  { type: "tel",   name: "phone", label: "Phone Number",   placeholder: "+91 98000 00000",   required: false, col: 6 },
+  { type: "email", name: "email", label: "Email Address",  placeholder: "you@example.com",   required: true,  col: 12 },
 ];
 
 const eventTypes = [
-  { value: "wedding", label: "Wedding & Reception" },
-  { value: "corporate", label: "Corporate Event" },
-  { value: "gala", label: "Social Gala / Award Night" },
-  { value: "concert", label: "Concert / Show" },
-  { value: "brand", label: "Brand Activation" },
-  { value: "other", label: "Other" },
+  { value: "stage",     label: "Stage Decoration" },
+  { value: "car",       label: "Car Decoration" },
+  { value: "dj",        label: "DJ & DJ Lightings" },
+  { value: "birthday",  label: "Birthday Decoration" },
+  { value: "sounds",    label: "Sounds & Lightings" },
+  { value: "entry",     label: "Welcome Entry & Fireworks" },
+  { value: "paper",     label: "Paper Blasting" },
+  { value: "corporate", label: "Corporate Events" },
+  { value: "stalls",    label: "Stalls & Food Counters" },
+  { value: "other",     label: "Other" },
 ];
 
-// Memoized contact info item
-const ContactInfoItem = memo(({ info }) => (
-  <div className="d-flex align-items-start gap-3" key={info.label}>
-    <div>
-      <strong>{info.label}</strong>
-      <div style={{ whiteSpace: "pre-line" }}>{info.value}</div>
-    </div>
-  </div>
-));
-
-ContactInfoItem.displayName = 'ContactInfoItem';
-
-// Memoized form input component
-const FormInput = memo(({ field, value, onChange }) => {
-  const inputProps = {
-    type: field.type,
-    name: field.name,
-    className: "form-control",
-    placeholder: field.placeholder,
-    required: field.required,
-    value: value || '',
-    onChange,
-    id: `field-${field.name}`,
-    'aria-label': field.label,
-    'aria-required': field.required,
-  };
-
-  return (
-    <div className={`col-12 col-sm-${field.col}`}>
-      <label htmlFor={`field-${field.name}`}>{field.label}</label>
-      <input {...inputProps} />
-    </div>
-  );
-});
-
-FormInput.displayName = 'FormInput';
-
-// Memoized form select component
-const FormSelect = memo(({ value, onChange }) => (
-  <div className="mb-3">
-    <label htmlFor="eventType">Event Type</label>
-    <select
-      id="eventType"
-      name="eventType"
-      className="form-control"
-      value={value}
-      onChange={onChange}
-      required
-      aria-label="Event Type"
-    >
-      <option value="" disabled>Select Event Type</option>
-      {eventTypes.map(type => (
-        <option key={type.value} value={type.value}>
-          {type.label}
-        </option>
-      ))}
-    </select>
-  </div>
-));
-
-FormSelect.displayName = 'FormSelect';
-
-// Memoized date input
-const FormDate = memo(({ value, onChange }) => (
-  <div className="mb-3">
-    <label htmlFor="eventDate">Expected Date</label>
+const FormInput = memo(({ field, value, onChange }) => (
+  <div className={`col-12 col-sm-${field.col}`}>
+    <label className="form-label" htmlFor={`field-${field.name}`}>{field.label}</label>
     <input
-      id="eventDate"
-      type="date"
-      name="date"
+      id={`field-${field.name}`}
+      type={field.type}
+      name={field.name}
       className="form-control"
-      value={value}
+      placeholder={field.placeholder}
+      required={field.required}
+      value={value || ""}
       onChange={onChange}
-      aria-label="Expected Event Date"
+      aria-label={field.label}
     />
   </div>
 ));
+FormInput.displayName = "FormInput";
 
-FormDate.displayName = 'FormDate';
-
-// Memoized textarea
-const FormTextarea = memo(({ value, onChange }) => (
-  <div className="mb-4">
-    <label htmlFor="message">Tell Us Your Vision</label>
-    <textarea
-      id="message"
-      name="message"
-      className="form-control"
-      rows={4}
-      placeholder="Describe your dream event..."
-      value={value}
-      onChange={onChange}
-      aria-label="Event description"
-    />
-  </div>
-));
-
-FormTextarea.displayName = 'FormTextarea';
-
-// Main component
 const Contact = memo(() => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    eventType: '',
-    date: '',
-    message: '',
+    name: "", phone: "", email: "", eventType: "", date: "", message: "",
   });
 
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
-      const response = await fetch(
+      await fetch(
         "https://script.google.com/macros/s/AKfycbwTmWEBBGC06C227HgbhQqa2lH6PHdPpDvdqCP6Zb6qqf4CiG5SW6vQU3w_L7c457JD/exec",
         {
           method: "POST",
-          mode: 'no-cors', // Add this for CORS issues with Google Apps Script
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         }
       );
-
-      // Google Apps Script with no-cors returns opaque response
       setSubmitted(true);
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        eventType: '',
-        date: '',
-        message: '',
-      });
+      setFormData({ name: "", phone: "", email: "", eventType: "", date: "", message: "" });
       e.target.reset();
     } catch (error) {
       console.error("Error:", error);
-      // Show user-friendly error message
-      alert('Something went wrong. Please try again or contact us directly.');
+      alert("Something went wrong. Please try again or contact us directly.");
     } finally {
       setLoading(false);
     }
   };
 
-  const resetForm = useCallback(() => {
-    setSubmitted(false);
-  }, []);
+  const resetForm = useCallback(() => setSubmitted(false), []);
 
   return (
     <section id="contact" className="contact-section">
@@ -221,33 +81,24 @@ const Contact = memo(() => {
       <div className="container position-relative">
 
         {/* Header */}
-        <div className="text-center mb-5">
+        <div className="text-center mb-5 reveal">
           <div className="section-tag mb-3">Get In Touch</div>
-          <h2 className="text-white mb-0">
-            Let's Create <span className="gold-shimmer">Together</span>
+          <h2 className="font-display text-white mb-0" style={{ fontSize: "clamp(2.6rem,5vw,4rem)", fontWeight: 300 }}>
+            Let's Create <span className="gold-shimmer" style={{ fontWeight: 600 }}>Together</span>
           </h2>
+          <hr className="gold-line mx-auto mt-4" style={{ width: 90 }} />
           <p className="contact-subtitle mt-3">
             Tell us your vision and we'll bring it to life.
           </p>
         </div>
 
-        <div className="row g-5">
-
-          {/* Left Info */}
-          <div className="col-12 col-lg-5">
-            <div className="d-flex flex-column gap-4">
-              {contactInfo.map((info) => (
-                <ContactInfoItem key={info.label} info={info} />
-              ))}
-            </div>
-          </div>
-
-          {/* Form */}
-          <div className="col-12 col-lg-7">
+        {/* Form — centred, max width so it doesn't stretch too wide */}
+        <div className="row justify-content-center reveal" style={{ transitionDelay: "0.15s" }}>
+          <div className="col-12 col-lg-8">
             <form onSubmit={handleSubmit} noValidate>
 
               <div className="row g-3 mb-3">
-                {formFields.map(field => (
+                {formFields.map((field) => (
                   <FormInput
                     key={field.name}
                     field={field}
@@ -257,20 +108,50 @@ const Contact = memo(() => {
                 ))}
               </div>
 
-              <FormSelect
-                value={formData.eventType}
-                onChange={handleInputChange}
-              />
+              <div className="mb-3">
+                <label className="form-label" htmlFor="eventType">Event Type</label>
+                <select
+                  id="eventType"
+                  name="eventType"
+                  className="form-control"
+                  value={formData.eventType}
+                  onChange={handleInputChange}
+                  aria-label="Event Type"
+                >
+                  <option value="" disabled>Select Event Type</option>
+                  {eventTypes.map((t) => (
+                    <option key={t.value} value={t.value}>{t.label}</option>
+                  ))}
+                </select>
+              </div>
 
-              <FormDate
-                value={formData.date}
-                onChange={handleInputChange}
-              />
+              <div className="mb-3">
+                <label className="form-label" htmlFor="eventDate">Expected Date</label>
+                <input
+                  id="eventDate"
+                  type="date"
+                  name="date"
+                  className="form-control"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                  style={{ colorScheme: "dark" }}
+                  aria-label="Expected Event Date"
+                />
+              </div>
 
-              <FormTextarea
-                value={formData.message}
-                onChange={handleInputChange}
-              />
+              <div className="mb-4">
+                <label className="form-label" htmlFor="message">Tell Us Your Vision</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="form-control"
+                  rows={4}
+                  placeholder="Describe your dream event..."
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  aria-label="Event description"
+                />
+              </div>
 
               <button
                 type="submit"
@@ -280,40 +161,31 @@ const Contact = memo(() => {
               >
                 {loading ? (
                   <>
-                    <span className="spinner-border spinner-border-sm me-2" 
-                          role="status" 
-                          aria-hidden="true" 
-                    />
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" />
                     Sending...
                   </>
                 ) : (
-                  "Send Enquiry →"
+                  <span>Send Enquiry →</span>
                 )}
               </button>
 
             </form>
 
-            {/* Success Message */}
             {submitted && (
               <div className="mt-3 success-message" role="alert">
                 <span aria-hidden="true">✦</span> Thank you! We'll be in touch within 24 hours.
-                <button 
-                  onClick={resetForm}
-                  className="btn btn-link btn-sm ms-3"
-                  aria-label="Send another message"
-                >
+                <button onClick={resetForm} className="btn btn-link btn-sm ms-3" style={{ color: "var(--gold)" }}>
                   Send another
                 </button>
               </div>
             )}
           </div>
-
         </div>
+
       </div>
     </section>
   );
 });
 
-Contact.displayName = 'Contact';
-
+Contact.displayName = "Contact";
 export default Contact;

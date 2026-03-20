@@ -40,9 +40,9 @@ export default function App() {
         <Hero />
         <Stats />
         <Services />
-        <Works />
-        <About />
         <Gallery/>
+        {/* <Works /> */}
+        <About />
         <Testimonials />
         <Contact />
       </main>
